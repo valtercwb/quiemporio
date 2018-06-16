@@ -36,7 +36,7 @@ public class UserMB {
                 boolean auth = true;
                 sessionMB.setAttribute("auth", auth);
 
-                String url = "/selCrud.xhtml";
+                String url = "/dashPedido/dashboard_index.xhtml";
                 new RedirectMB(url);
             } else {
                 new MessageMB("msgInfo", "Usuário ou Senha inválidos!", "", 3);

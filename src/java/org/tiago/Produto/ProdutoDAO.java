@@ -1,6 +1,9 @@
 
 package org.tiago.Produto;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import org.me.database.Database;
 import org.me.exception.ExceptionError;
 
@@ -87,5 +90,36 @@ public class ProdutoDAO {
             throw new ExceptionError(e);
         }
         return retorno;
+    }
+    
+     public List<Produtos> listar() throws ExceptionError {
+        ArrayList<Produtos> retorno = new ArrayList<Produtos>();
+
+        try {
+            Database myDb = new Database();
+
+            String sql = "SELECT * FROM produtos";
+            myDb.setQuerySql(sql);
+
+            ResultSet myResult = myDb.setQueryParameter().executeQuery();
+
+            while(myResult.next()) {
+                Produtos user = new Produtos();
+                
+                user.setProd_id(myResult.getInt("id_produtos"));
+                user.setNome(myResult.getString("nome"));
+                user.setQuantidade(myResult.getInt("quantidade"));
+                user.setPreco_un(myResult.getDouble("valor_un"));
+                user.setData_adicionado(myResult.getTimestamp("data_adicionado"));
+                
+                retorno.add(user);
+            }
+        } catch (ExceptionError error) {
+            throw new ExceptionError(error);
+        } catch (Exception error) {
+            throw new ExceptionError(error);
+        }
+        return retorno;
+
     }
 }

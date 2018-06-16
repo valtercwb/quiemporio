@@ -4,13 +4,24 @@ package org.tiago.Cliente;
 import org.tiago.endereco.Endereco;
 
 
-public class Cliente extends Endereco{
+public class Cliente {
     
     private int Cliente_Id;
     private String nome;
     private String CNPJ;
     private String CPF;
+    private Endereco enderecoCompleto ;
 
+    public Endereco getEnderecoCompleto() {
+        return enderecoCompleto;
+    }
+
+    public void setEnderecoCompleto(Endereco enderecoCompleto) {
+        this.enderecoCompleto = enderecoCompleto;
+    }
+
+ 
+    
     public Cliente() {
     }
 

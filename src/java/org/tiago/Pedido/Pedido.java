@@ -2,6 +2,10 @@
 package org.tiago.Pedido;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import org.tiago.Cliente.Cliente;
+import org.tiago.ProdutosPedidos.Produtos_Pedidos;
 
 
 public class Pedido {
@@ -11,6 +15,36 @@ public class Pedido {
     private double ped_valor_total;
     private int vendedor_vend_id;
     private int cliente_cli_id;
+    private String CEP_cli;
+    
+    private Cliente cliente;
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    
+    private List<Produtos_Pedidos> listaProdutos = new ArrayList<>();
+
+    public List<Produtos_Pedidos> getListaProdutos() {
+        return listaProdutos;
+    }
+
+    public void setListaProdutos(List<Produtos_Pedidos> listaProdutos) {
+        this.listaProdutos = listaProdutos;
+    }
+
+    public String getCEP_cli() {
+        return CEP_cli;
+    }
+
+    public void setCEP_cli(String CEP_cli) {
+        this.CEP_cli = CEP_cli;
+    }
+    
 
     public int getPed_id() {
         return ped_id;

@@ -20,7 +20,7 @@ public class Database {
             String senha;
 
             driver = "com.mysql.fabric.jdbc.FabricMySQLDriver";
-            url = "jdbc:mysql://quiemporio.clziz1rfzenu.sa-east-1.rds.amazonaws.com/quiemporio";
+            url = "jdbc:mysql://localhost/quiemporio";
             usuario = "root";
             senha = "unicuritiba";
 

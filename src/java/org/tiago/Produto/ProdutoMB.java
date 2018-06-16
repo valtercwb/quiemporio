@@ -5,8 +5,12 @@
  */
 package org.tiago.Produto;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import org.me.exception.ExceptionError;
 import org.me.util.MessageMB;
 import org.me.util.SessionMB;
 
@@ -46,6 +50,21 @@ public class ProdutoMB {
             new MessageMB("msgInfo", e.getMessage(), "", 4);
         }
     }
+    
+       public List<Produtos> listar() throws IOException {
+        List produtoList = new ArrayList<Produtos>();
+
+        try {
+            ProdutoConstrutor userController = new ProdutoConstrutor();
+
+            produtoList = userController.listar();
+
+        } catch (ExceptionError error) {
+            new MessageMB("msgInfo", error.getMessage(), "", 4);
+        }
+
+        return produtoList;
+        }
     
     
     
