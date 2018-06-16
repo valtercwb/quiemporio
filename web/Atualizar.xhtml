@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html">
+    <head>
+        <title>Formulário de cadastro</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+        <!-- Bootstrap -->
+        <link href="scripts/css/bootstrap-theme.min.css" rel="stylesheet"></link>
+        <link href="scripts/css/bootstrap.css" rel="stylesheet"></link>
+        <link href="scripts/css/signin.css" rel="stylesheet"></link>
+        <script src="scripts/js/bootstrap.min.js"></script>
+        
+        <!-- Jquery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    </head>
+    <body class="bg-white">
+        <table border="4" style="margin: 0 auto;">
+            <tr style="padding: 10px;"><td>ID</td> <td> Login </td> <td> E-mail </td>  <td> Nome </td> </tr>
+                     <tr style="padding: 10px;"><td>#{userMB.user.id}</td> <td> #{userMB.user.login} </td> <td> #{userMB.user.email} </td>  <td> #{userMB.user.name} </td> </tr>
+           </table>
+        <div class="container">
+            
+                <h:form class="form-signin">
+                
+                <h2 class="form-signin-heading">Atualizar seu cadastro</h2>
+          
+
+                <div class="btn btn-xs btn-primary">Nome: </div>
+                 <h:inputText id="inputName" class="form-control"
+                             requiredMessage="Campo Obrigatório"
+                             label="Nome"
+                             value="#{userMB.user.name}">
+                </h:inputText>
+                
+                <div class="btn btn-xs btn-primary">E-mail: </div>
+                
+                 <h:inputText id="inputEmail" class="form-control"
+                             requiredMessage="Campo Obrigatório"
+                             label="Email"
+                             value="#{userMB.user.email}">
+                </h:inputText>
+                
+                <div class="btn btn-xs btn-primary">Login </div>
+                <h:inputText id="inputSenha" class="form-control"
+                             requiredMessage="Campo Obrigatório"
+                             label="Senha"
+                             value="#{userMB.user.login}">
+                </h:inputText>
+                
+                 <h:messages id="msgInfo"
+                            infoClass="btn btn-bg alert-success"
+                            warnClass="btn btn-bg alert-warning"
+                            errorClass="btn btn-bg alert-danger"
+                            fatalClass="btn btn-bg alert-danger"
+                            globalOnly="false"
+                            />
+                                 <br />
+                <h:commandButton class="btn btn-lg btn-primary btn-block" value="Atualizar" action="#{userMB.atualizar()}"></h:commandButton>
+                <h:commandButton class="btn btn-lg btn-primary btn-block" value="Pesquisar" action="#{userMB.consulta()}"></h:commandButton>
+                <br />
+                
+            </h:form>
+            
+           
+        </div>
+    </body>
+</html>

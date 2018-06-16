@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html">
+    <head>
+        <title>Acesso ao Sistema</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+        <!-- Bootstrap -->
+        <link href="scripts/css/bootstrap-theme.min.css" rel="stylesheet"></link>
+        <link href="scripts/css/bootstrap.css" rel="stylesheet"></link>
+        <link href="scripts/css/signin.css" rel="stylesheet"></link>
+        <script src="scripts/js/bootstrap.min.js"></script>
+        
+        <!-- Jquery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    </head>
+    <body class="bg-white">
+        <div class="container">
+            <h:form  class="form-signin">
+                <h2 class="form-signin-heading">Acesso ao Sistema</h2>
+                
+                <div class="btn btn-xs btn-primary">E-mail:</div>
+                <h:inputText id="inputLogin" class="form-control"
+                             required="required"
+                             requiredMessage="Campo Obrigatório"
+                             label="Login"
+                             value="#{userMB.user.email}">
+                </h:inputText>
+               
+                
+                <br />
+                <div class="btn btn-xs btn-primary">Senha:</div>
+                <h:inputSecret id="inputPassword" class="form-control" 
+                               required="required"
+                               label="Senha"
+                               value="#{userMB.user.password}">
+                </h:inputSecret>
+                <h:commandButton class="btn btn-lg btn-primary btn-block" 
+                value="entrar" action="#{userMB.login()}"></h:commandButton>
+
+                <br />
+                <h:messages id="msgInfo"
+                            infoClass="btn btn-bg alert-success"
+                            warnClass="btn btn-bg alert-warning"
+                            errorClass="btn btn-bg alert-danger"
+                            fatalClass="btn btn-bg alert-danger"
+                            globalOnly="false"
+                            />
+            </h:form >
+        </div>
+    </body>
+</html>
