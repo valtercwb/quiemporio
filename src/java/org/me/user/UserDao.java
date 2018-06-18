@@ -6,31 +6,28 @@ import org.me.exception.ExceptionError;
 
 public class UserDao {
 
-    public boolean login(User user) throws ExceptionError {
+    public User login(User user) throws ExceptionError {
         boolean retorno = false;
         try {
             Database myDb = new Database();
 
-            String sql = "SELECT * FROM usuario WHERE usu_email = ? AND usu_senha = MD5(?)";
+            String sql = "SELECT * FROM usuario WHERE usu_email = ? AND usu_senha = ?";
             myDb.setQuerySql(sql);
-
             myDb.setQueryParameter().setString(1, user.getEmail());
             myDb.setQueryParameter().setString(2, user.getPassword());
 
-            //System.out.println(user.getLogin());
-            //System.out.println(user.getPassword());
             ResultSet myResult = myDb.setQueryParameter().executeQuery();
 
             if (myResult.next()) {
-                retorno = true;
+                user.setEmail(myResult.getString("usu_email"));                
+                user.setName(myResult.getString("usu_nome"));                
             }
+            return user;
         } catch (ExceptionError error) {
             throw new ExceptionError(error);
         } catch (Exception error) {
             throw new ExceptionError(error);
         }
-        return retorno;
-
     }
 
     public boolean cadastrar(User user) throws ExceptionError {

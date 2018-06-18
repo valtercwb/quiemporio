@@ -4,21 +4,15 @@ import org.me.exception.ExceptionError;
 
 public class UserController {
 
-    public boolean login(User user) throws ExceptionError {
-        
+    public User login(User user) throws ExceptionError {
         UserDao userDao = new UserDao();
-        boolean retorno = userDao.login(user);
-        return retorno;
-        
-    }
-    
+        User u = userDao.login(user);
+        return u;
+    } 
     
     public boolean cadastrar(User user) throws ExceptionError {
-        
         UserDao userDao = new UserDao();
         boolean retorno = userDao.cadastrar(user);
         return retorno;
-        
     }
-
 }
