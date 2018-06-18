@@ -31,10 +31,7 @@ and open the template in the editor.
   <body>
       
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-        <a class="navbar-brand font-weight-bold" href="#" title="Quiemporio">
-       <img style="max-width:40px;"
-            src="../scripts/img/logo.png"></img>
-      </a>
+      <a class="navbar-brand font-weight-bold" href="#">QuiEmpório</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -42,15 +39,11 @@ and open the template in the editor.
       <div class="collapse navbar-collapse" id="navbarColor">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-              Bem vindo <span class="white"> #{userMB.user.name}</span>
             <a class="nav-link font-weight-bold" href="#">Perfil</a>
           </li>
   
           <li>
-              <h:form class="form-signinds">
-                  <h:commandLink value="logout" action="#{userMB.logout()}" class="btn btn-default white"/>
-                     
-              </h:form>           
+            <a href="index.xhtml" class="btn btn-default white"><i class="fas fa-sign-out-alt"></i></a>
           </li>
         </ul>
       </div>
@@ -77,7 +70,7 @@ and open the template in the editor.
       <div class="row">
         <nav class="d-none d-lg-block bg-faded sidebar">
           <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link text-center active" href="/WebJFSMangedBenas/dashPedido/dashboard_index.xhtml"> <i class="fas fa-clipboard-list fa-2x m-3"></i>Pedidos</a>
             </li>
             <li class="nav-item">
@@ -138,7 +131,9 @@ and open the template in the editor.
           </div>
             
             <div class="col-xl-12 offset-xl-1 col-lg-12 offset-lg-1 col-md-12 offset-md-1 col-sm-12 offset-sm-1 mt-3">
-                <a href="dashboard_index_cadastrar.xhtml"><button class="btn" style="width: 100px" >Inserir </button></a>
+                 <a href="/WebJFSMangedBenas/dashCli/dashboard_clientes_cadastrar.xhtml">
+                     <h:form><h:commandButton class="btn btn-danger btn-lg" value="Inserir" action="#{PedidoMB.limparObjeto()}"></h:commandButton>
+                    </h:form></a>
             </div>
         </main>
       </div>

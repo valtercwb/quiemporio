@@ -73,7 +73,7 @@ and open the template in the editor.
             <li class="nav-item">
               <a class="nav-link text-center " href="/WebJFSMangedBenas/dashPedido/dashboard_index.xhtml"> <i class="fas fa-clipboard-list fa-2x m-3"></i>Pedidos</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link text-center active" href="/WebJFSMangedBenas/dashProduto/dashboard_produto.xhtml"> <i class="fas fa-clipboard-list fa-2x m-3"></i>Produtos</a>
             </li>
             <li class="nav-item">
@@ -117,10 +117,16 @@ and open the template in the editor.
                     </h:column>
                     <h:column>
                         <f:facet name="header"></f:facet>
-                        <h:commandButton class="btn" value="Alterar" action="#{userMB.buscar(linha)}"></h:commandButton>
+                        <h:commandButton class="btn" value="Alterar" action="#{ProdutoMB.buscar(linha)}"></h:commandButton>       
                     </h:column>
+                    <h:column>
+                        <h:commandButton class="btn" value="Excluir" action="#{ProdutoMB.excluir(linha)}"></h:commandButton>
+                    </h:column>>
+                   
                     
                 </h:dataTable>
+                
+                 
                 <br />
                  <h:messages id="msgInfo"
                             infoClass="btn btn-bg alert-success"
@@ -130,8 +136,14 @@ and open the template in the editor.
                             globalOnly="false"
                             />
             </h:form>
+              
           </div>
-        
+            <div class="col-xl-12 offset-xl-1 col-lg-12 offset-lg-1 col-md-12 offset-md-1 col-sm-12 offset-sm-1 mt-3">
+             
+                <h:form><a href="/WebJFSMangedBenas/dashProduto/dashboard_produto_cadastrar.xhtml">
+                        <h:commandButton class="btn btn-danger btn-lg" value="Cadastrar" action="#{ProdutoMB.limparObjeto()}" ></h:commandButton>
+                    </a></h:form>
+            </div>
         </main>
       </div>
     </div>

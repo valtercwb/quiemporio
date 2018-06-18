@@ -79,7 +79,7 @@ and open the template in the editor.
             <li class="nav-item">
               <a class="nav-link text-center " href="/WebJFSMangedBenas/dashEstatistica/dashboard_estatisicas.xhtml"><i class="fas fa-chart-area fa-2x m-3"></i>Estatísticas</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link text-center active" href="/WebJFSMangedBenas/dashCli/dashboard_clientes.xhtml"><i class="fa fa-user-circle fa-2x m-3"></i>Cliente</a>
             </li>="
           </ul>
@@ -95,6 +95,10 @@ and open the template in the editor.
                
                 
                 <h:dataTable value="#{ClienteMB.listar()}" var="linha" class="table">
+                    <h:column>
+                        <f:facet name="header">id</f:facet>
+                        #{linha.cliente_Id}
+                    </h:column>
                     <h:column>
                         <f:facet name="header">nome</f:facet>
                         #{linha.nome}
@@ -118,9 +122,13 @@ and open the template in the editor.
                    
                     <h:column>
                         <f:facet name="header"></f:facet>
-                        <h:commandButton class="btn" value="Alterar" action="#{userMB.buscar(linha)}"></h:commandButton>
+                        <h:commandButton class="btn" value="Alterar" action="#{ClienteMB.buscar(linha)}"></h:commandButton>
+                        
                     </h:column>
-                    
+                    <h:column>
+                        <f:facet name="header"></f:facet>
+                        <h:commandButton class="btn" value="Excluir" action="#{ClienteMB.excluir(linha)}"></h:commandButton>
+                     </h:column>
                 </h:dataTable>
                 <br />
                  <h:messages id="msgInfo"
@@ -132,7 +140,11 @@ and open the template in the editor.
                             />
             </h:form>
           </div>
-        
+            <div class="col-xl-12 offset-xl-1 col-lg-12 offset-lg-1 col-md-12 offset-md-1 col-sm-12 offset-sm-1 mt-3">
+                
+                    <h:form><h:commandButton class="btn btn-danger btn-lg" value="Cadastrar" action="#{ClienteMB.limparObjeto()}"></h:commandButton>
+                    </h:form>
+            </div>
         </main>
       </div>
     </div>

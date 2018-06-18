@@ -3,15 +3,13 @@ package org.me.user;
 import java.io.IOException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import org.me.exception.ExceptionError;
 import org.me.util.MessageMB;
 import org.me.util.RedirectMB;
 import org.me.util.SessionMB;
 
 @ManagedBean(name = "userMB")
-@SessionScoped
+@RequestScoped
 
 public class UserMB {
 
@@ -32,11 +30,11 @@ public class UserMB {
     public void login() throws IOException {
         try {
             UserController userController = new UserController();
-            user = userController.login(this.user);
-            if (user.getName() != null){
+
+            if (userController.login(this.user)) {
+
                 boolean auth = true;
                 sessionMB.setAttribute("auth", auth);
-                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("nome", user.getName());
 
                 String url = "/dashPedido/dashboard_index.xhtml";
                 new RedirectMB(url);
@@ -48,12 +46,6 @@ public class UserMB {
             new MessageMB("msgInfo", error.getMessage(), "", 4);
         }
 
-    }
-    
-    public String logout(){
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("nome");
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return " ./index.xhtml?faces-redirect=true";
     }
 
     public void cadastrar() throws IOException {

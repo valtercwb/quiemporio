@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import org.me.exception.ExceptionError;
 import org.me.util.MessageMB;
+import org.me.util.RedirectMB;
 import org.me.util.SessionMB;
 import org.tiago.Cliente.Cliente;
 import org.tiago.Cliente.ClienteController;
@@ -79,6 +80,13 @@ public class PedidoMB {
 
         return pedidoList;
        }
+        public void limparObjeto(){
+    
+        this.produtos = null;
+         String url = "/dashPedido/dashboard_index_cadastrar.xhtml";
+
+            RedirectMB redirectMB = new RedirectMB(url);       
+    }
     
 
 }
