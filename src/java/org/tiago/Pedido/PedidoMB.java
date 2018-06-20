@@ -14,6 +14,7 @@ import org.me.util.SessionMB;
 import org.tiago.Cliente.Cliente;
 import org.tiago.Cliente.ClienteController;
 import org.tiago.Produto.ProdutoConstrutor;
+import org.tiago.Produto.ProdutoDAO;
 import org.tiago.Produto.Produtos;
 import org.tiago.ProdutosPedidos.Produtos_Pedidos;
 
@@ -77,6 +78,12 @@ public class PedidoMB {
         }
     }*/
     
+       public void buscaProduto (int id) throws ExceptionError{
+           ProdutoDAO buscaProduto = new ProdutoDAO();
+           setProduto(buscaProduto.buscar(id));
+           
+       } 
+        
        public List<Pedido> listar() throws IOException {
         List pedidoList = new ArrayList<Pedido>();
 
@@ -146,6 +153,11 @@ public class PedidoMB {
         public void excluirListaProduto(Produtos_Pedidos produto) throws IOException{
             
             ListaProdutosPedidos.remove(produto);
+        }
+        
+        public void excluirTudoListaProduto(){
+            
+            ListaProdutosPedidos.removeAll(ListaProdutosPedidos);
         }
           
 

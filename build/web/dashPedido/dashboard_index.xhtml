@@ -9,7 +9,7 @@ and open the template in the editor.
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"      
       xmlns:h="http://java.sun.com/jsf/html">
-   
+   #{userMB.userSeguranca()}
   <head>
     <meta charset="utf-8"></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
@@ -29,7 +29,7 @@ and open the template in the editor.
   </head>
 
   <body>
-      
+    
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
       <a class="navbar-brand font-weight-bold" href="#">QuiEmpório</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" 
@@ -39,13 +39,16 @@ and open the template in the editor.
       
       <div class="collapse navbar-collapse " id="navbarColor">
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <div class="btn ">#{userMB.getSessionUser("user").email}  </div>
+           </li>
           <li class="nav-item">
             <a class="nav-link font-weight-bold" href="#">Perfil</a>
           </li>
   
-          <li>
-            <a href="index.xhtml" class="btn btn-default white"><i class="fas fa-sign-out-alt"></i></a>
-          </li>
+          
+             <h:form> <h:commandButton class="btn btn-default white" action="#{userMB.logout()}"></h:commandButton></h:form>
+          
         </ul>
       </div>
     </nav>     

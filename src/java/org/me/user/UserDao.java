@@ -6,8 +6,8 @@ import org.me.exception.ExceptionError;
 
 public class UserDao {
 
-    public boolean login(User user) throws ExceptionError {
-        boolean retorno = false;
+    public User login(User user) throws ExceptionError {
+        User retorno = null;
         try {
             Database myDb = new Database();
 
@@ -22,7 +22,15 @@ public class UserDao {
             ResultSet myResult = myDb.setQueryParameter().executeQuery();
 
             if (myResult.next()) {
-                retorno = true;
+                User userLogado = new User();
+                
+                userLogado.setId(myResult.getInt("usu_id"));
+                userLogado.setEmail(myResult.getString("usu_email"));
+                userLogado.setName(myResult.getString("usu_nome"));
+                userLogado.setPassword(myResult.getString("usu_senha"));
+
+                
+                retorno = userLogado;
             }
         } catch (ExceptionError error) {
             throw new ExceptionError(error);

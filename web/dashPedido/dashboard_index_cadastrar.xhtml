@@ -114,22 +114,32 @@ and open the template in the editor.
 
                   <hr />
                   <br />
-                  <h:selectOneMenu class="form " style="width: 300px;" valueChangeListener="#{PedidoMB.produto}" converter="ProdutoConverte" >
-                     
+                  <h:selectOneMenu class="form-control " style="width: 300px;" valueChangeListener="#{PedidoMB.produto}" converter="ProdutoConverte">
+            
                       <f:selectItems value="#{ProdutoMB.listar()}"
                                    var="produto"                              
-                                   itemLabel="#{produto.nome} --- #{produto.quantidade}"
+                                   itemLabel="#{produto.prod_id} - #{produto.nome}"
                                    itemValue="#{produto}">
  
                     </f:selectItems>
                                    
                     </h:selectOneMenu> 
+                  <br />
+                  <div class="btn ">Quantidade   </div>
                    <h:inputText id="inputQuantidade" class="form"
-                             required="required"
+                                required="required" style="width: 100px"
                              requiredMessage="Campo Obrigatório"
                              label="Quantidade"
-                             value="#{PedidoMB.produto.nome}">
-                </h:inputText>
+                             value="#{PedidoMB.produto.quantidade}">
+                   </h:inputText>
+                  <br />
+                   <div class="btn">Preço Unitário</div>
+                   <h:inputText id="inputPreço" class="form"
+                             required="required" style="width: 100px; text-align: right"
+                             requiredMessage="Campo Obrigatório"
+                             label="Preço"
+                             value="#{PedidoMB.produto.preco_un}">
+                   </h:inputText>
                   
                   <h:commandButton class="btn-success form" value="+" action="#{PedidoMB.adicionarListaProduto()}"></h:commandButton>
                   
@@ -151,7 +161,7 @@ and open the template in the editor.
                         #{linha.preco_produto}
                     </h:column>
                     <h:column>
-                        <f:facet name="header"></f:facet>
+                        <f:facet name="header"><h:commandButton class="btn-danger" value="Excluir TUDO" action="#{PedidoMB.excluirTudoListaProduto()}"></h:commandButton></f:facet>
                         <h:commandButton class="btn-danger" value="Excluir" action="#{PedidoMB.excluirListaProduto(linha)}"></h:commandButton>
                     </h:column>
                     
