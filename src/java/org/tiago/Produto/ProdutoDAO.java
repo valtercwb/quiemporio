@@ -121,7 +121,7 @@ public class ProdutoDAO {
 
     }
      
-     public Produtos buscar(Produtos produto) throws ExceptionError {
+     public Produtos buscar(int id) throws ExceptionError {
         Produtos retorno = new Produtos();
 
         try {
@@ -130,7 +130,7 @@ public class ProdutoDAO {
             String sql = "SELECT * FROM produtos WHERE id_produtos = ?";
             myDb.setQuerySql(sql);
 
-            myDb.setQueryParameter().setInt(1, produto.getProd_id());
+            myDb.setQueryParameter().setInt(1, id);
 
             ResultSet myResult = myDb.setQueryParameter().executeQuery();
 

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import org.me.exception.ExceptionError;
 import org.me.util.MessageMB;
 import org.me.util.RedirectMB;
@@ -14,25 +15,49 @@ import org.tiago.Cliente.Cliente;
 import org.tiago.Cliente.ClienteController;
 import org.tiago.Produto.ProdutoConstrutor;
 import org.tiago.Produto.Produtos;
+import org.tiago.ProdutosPedidos.Produtos_Pedidos;
 
 @ManagedBean (name = "PedidoMB")
-@RequestScoped
+@SessionScoped
     
 public class PedidoMB {
     
     private SessionMB sessionMB = new SessionMB();
-    private Pedido produtos = new Pedido();
+    private Pedido pedido = new Pedido();
+    private Produtos produto = new Produtos();
+    ArrayList<Produtos_Pedidos> ListaProdutosPedidos = new ArrayList<>();
 
+    public Produtos getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produtos produto) {
+        this.produto = produto;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+
+    public ArrayList<Produtos_Pedidos> getListaProdutosPedidos() {
+        return ListaProdutosPedidos;
+    }
+
+    public void setListaProdutosPedidos(ArrayList<Produtos_Pedidos> ListaProdutosPedidos) {
+        this.ListaProdutosPedidos = ListaProdutosPedidos;
+    }
+    
+    
+    
     public PedidoMB() {
     }
 
-    public Pedido getProdutos() {
-        return produtos;
-    }
 
-    public void setProdutos(Pedido produtos) {
-        this.produtos = produtos;
-    }
   
     /*public void cadastrar(){
             
@@ -80,13 +105,48 @@ public class PedidoMB {
 
         return pedidoList;
        }
-        public void limparObjeto(){
+      
+       public List<Produtos_Pedidos> listarProdutosPedido() throws IOException{
+            List pedidoList = new ArrayList<Produtos_Pedidos>();
+
+        try {
+            PedidoController pedidoController = new PedidoController();
+
+            pedidoList = pedidoController.ListarProdutos();
+
+        } catch (ExceptionError error) {
+            new MessageMB("msgInfo", error.getMessage(), "", 4);
+        }
+
+        return pedidoList;
+       } 
+       
+       public void limparObjeto(){
     
-        this.produtos = null;
+        
          String url = "/dashPedido/dashboard_index_cadastrar.xhtml";
 
-            RedirectMB redirectMB = new RedirectMB(url);       
-    }
-    
+         RedirectMB redirectMB = new RedirectMB(url);
+            
+        }
+        
+        
+        public void adicionarListaProduto() throws IOException{
+           
+           Produtos_Pedidos ProdutosPedidos =  new Produtos_Pedidos();
+           ProdutosPedidos.setPreco_produto(this.produto.getPreco_un());
+           ProdutosPedidos.setProdId(this.produto.getProd_id());
+           ProdutosPedidos.setQuantidade_produto(this.produto.getQuantidade());
+           
+           
+           ListaProdutosPedidos.add(ProdutosPedidos);
+            
+        }
+        
+        public void excluirListaProduto(Produtos_Pedidos produto) throws IOException{
+            
+            ListaProdutosPedidos.remove(produto);
+        }
+          
 
 }

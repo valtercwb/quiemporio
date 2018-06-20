@@ -32,7 +32,7 @@ public class ProdutoConstrutor {
     public Produtos buscar(Produtos produto) throws ExceptionError {
         
         ProdutoDAO produtoDao = new ProdutoDAO();
-        Produtos retorno = produtoDao.buscar(produto);
+        Produtos retorno = produtoDao.buscar(produto.getProd_id());
         return retorno;
         
     }

@@ -1,6 +1,8 @@
 
 package org.tiago.ProdutosPedidos;
 
+import org.tiago.Produto.Produtos;
+
 
 public class Produtos_Pedidos {
     
@@ -8,7 +10,17 @@ public class Produtos_Pedidos {
     private int ProdId;
     private int quantidade_produto;
     private double preco_produto;
+    private Produtos produtos;
+   
+    
+    public Produtos getProdutos() {
+        return produtos;
+    }
 
+    public void setProdutos(Produtos produtos) {
+        this.produtos = produtos;
+    }
+    
     public Produtos_Pedidos() {
     }
 

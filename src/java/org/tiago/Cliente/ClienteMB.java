@@ -118,6 +118,7 @@ public class ClienteMB {
                 new MessageMB("msgInfo", "Cliente não excluido!", "", 3);
             }
         } catch (Exception e) {
+            new MessageMB("msgInfo", e.getMessage(), "", 3);
         }
     } 
      
