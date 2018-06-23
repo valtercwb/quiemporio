@@ -3,8 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Tiago%20Ribeiro/Documents/GitHub/quiemporio/web/dashPedido/dashboard_index.xhtml</file>
-            <file>file:/C:/Users/Tiago%20Ribeiro/Documents/GitHub/quiemporio/src/java/org/me/user/UserMB.java</file>
+            <file>file:/C:/Users/Tiago%20Ribeiro/Documents/GitHub/quiemporio/src/java/org/tiago/Pedido/PedidoDAO.java</file>
+            <file>file:/C:/Users/Tiago%20Ribeiro/Documents/GitHub/quiemporio/src/java/org/tiago/Pedido/PedidoController.java</file>
+            <file>file:/C:/Users/Tiago%20Ribeiro/Documents/GitHub/quiemporio/src/java/org/tiago/Pedido/PedidoMB.java</file>
         </group>
     </open-files>
 </project-private>

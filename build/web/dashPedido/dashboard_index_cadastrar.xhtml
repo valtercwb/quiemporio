@@ -42,6 +42,9 @@ and open the template in the editor.
       
       <div class="collapse navbar-collapse" id="navbarColor">
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <div class="btn ">#{userMB.getSessionUser("user").email}  </div>
+           </li>
           <li class="nav-item">
             <a class="nav-link font-weight-bold" href="#">Perfil</a>
           </li>
@@ -56,16 +59,16 @@ and open the template in the editor.
         <div class="container-fluid">
             <ul class="nav">
                 <li class="nav-item col-3 active">
-                    <a class="nav-link text-center " href="dashboard_index.xhtml"> <i class="fas fa-clipboard-list fa-2x"></i></a>
+                    <a class="nav-link text-center " href="/WebJFSMangedBenas/dashPedido/dashboard_index.xhtml"> <i class="fas fa-clipboard-list fa-2x"></i></a>
                   </li>
                   <li class="nav-item col-3">
-                      <a class="nav-link text-center " href="dashboard_produto.xhtml" ><i class="fas fa-cubes fa-2x"></i><span class="sr-only">(current)></span></a>
+                      <a class="nav-link text-center " href="/WebJFSMangedBenas/dashProduto/dashboard_produto.xhtml" ><i class="fas fa-cubes fa-2x"></i><span class="sr-only">(current)></span></a>
                   </li>
                   <li class="nav-item col-3">
-                    <a class="nav-link text-center" href="dashboard_estatisicas.xhtml"><i class="fas fa-chart-area fa-2x"></i></a>
+                    <a class="nav-link text-center" href="/WebJFSMangedBenas/dashEstatistica/dashboard_estatisicas.xhtml"><i class="fas fa-chart-area fa-2x"></i></a>
                   </li>
                   <li class="nav-item col-3">
-                    <a class="nav-link text-center" href="dashboard_clientes.xhtml"><i class="fa fa-user-circle fa-2x"></i></a>
+                    <a class="nav-link text-center" href="/WebJFSMangedBenas/dashCli/dashboard_clientes.xhtml"><i class="fa fa-user-circle fa-2x"></i></a>
                   </li>
               </ul>
         </div>
@@ -75,16 +78,16 @@ and open the template in the editor.
         <nav class="d-none d-lg-block bg-faded sidebar">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a class="nav-link text-center active" href="dashboard_index.xhtml"> <i class="fas fa-clipboard-list fa-2x m-3"></i>Pedidos</a>
+              <a class="nav-link text-center active" href="/WebJFSMangedBenas/dashPedido/dashboard_index.xhtml"> <i class="fas fa-clipboard-list fa-2x m-3"></i>Pedidos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-center " href="dashboard_produto.xhtml"> <i class="fas fa-clipboard-list fa-2x m-3"></i>Produtos</a>
+              <a class="nav-link text-center " href="/WebJFSMangedBenas/dashProduto/dashboard_produto.xhtml"> <i class="fas fa-clipboard-list fa-2x m-3"></i>Produtos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-center " href="dashboard_estatisicas.xhtml"><i class="fas fa-chart-area fa-2x m-3"></i>Estatísticas</a>
+              <a class="nav-link text-center " href="/WebJFSMangedBenas/dashEstatistica/dashboard_estatisicas.xhtml"><i class="fas fa-chart-area fa-2x m-3"></i>Estatísticas</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-center" href="dashboard_clientes.xhtml"><i class="fa fa-user-circle fa-2x m-3"></i>Clientes</a>
+              <a class="nav-link text-center" href="/WebJFSMangedBenas/dashCli/dashboard_clientes.xhtml"><i class="fa fa-user-circle fa-2x m-3"></i>Clientes</a>
             </li>
           </ul>
         </nav>
@@ -98,11 +101,12 @@ and open the template in the editor.
                 <br />
                 <div class="btn btn-xs btn-primary">Cliente</div>
                 <br />
-                <h:selectOneMenu class="form-control" style="width: 400px;" >
+                <h:selectOneMenu class="form-control" style="width: 400px;" value="#{PedidoMB.pedido.cliente_cli_id}" >
+                    <f:selectItem itemLabel="Selecione" itemValue="" />  
                     <f:selectItems value="#{PedidoMB.listarCliente()}"
                                    var="cliente" 
                                    itemLabel="#{cliente.nome} --- #{cliente.CNPJ}"
-                                   itemValue="#{cliente.CNPJ}">
+                                   itemValue="#{cliente.cliente_Id}">
  
                     </f:selectItems>
                                    
@@ -114,32 +118,45 @@ and open the template in the editor.
 
                   <hr />
                   <br />
-                  <h:selectOneMenu class="form-control " style="width: 300px;" valueChangeListener="#{PedidoMB.produto}" converter="ProdutoConverte">
-            
+                  <div class="btn btn-xs btn-primary">Produto</div>
+                  <h:selectOneMenu class="form-control " style="width: 300px;" 
+                                   valueChangeListener="#{PedidoMB.buscaProduto}" onchange="submit()"
+                                   value="#{PedidoMB.produto.prod_id}"
+                                    >
+                        <f:selectItem itemLabel="Selecione" itemValue="" />  
+                
                       <f:selectItems value="#{ProdutoMB.listar()}"
                                    var="produto"                              
                                    itemLabel="#{produto.prod_id} - #{produto.nome}"
-                                   itemValue="#{produto}">
+                                   itemValue="#{produto.prod_id}">
  
                     </f:selectItems>
+                        
                                    
-                    </h:selectOneMenu> 
+                  </h:selectOneMenu>  
+
                   <br />
-                  <div class="btn ">Quantidade   </div>
+                  <div class="btn ">Quantidade</div>
                    <h:inputText id="inputQuantidade" class="form"
-                                required="required" style="width: 100px"
+                             style="width: 100px"
+                             required="required"
                              requiredMessage="Campo Obrigatório"
                              label="Quantidade"
-                             value="#{PedidoMB.produto.quantidade}">
+                             value="#{PedidoMB.quantidadeEdit}">
                    </h:inputText>
+                  <div class="btn ">Disponível</div>
+                  <h:outputText id="OutputQuantidade" class="form btn-lg btn-info" value="#{PedidoMB.produto.quantidade}"></h:outputText>
+                  
+                  <div class="btn "> Total</div> 
+                  <h:outputText id="OutputValor" class="form btn-lg btn-outline-success" value="R$ #{PedidoMB.d_Valor_Total}"></h:outputText>
                   <br />
-                   <div class="btn">Preço Unitário</div>
-                   <h:inputText id="inputPreço" class="form"
+<!--                   <div class="btn">Preço Unitário</div>-->
+<!--                   <h:inputText id="inputPreço" class="form"
                              required="required" style="width: 100px; text-align: right"
                              requiredMessage="Campo Obrigatório"
                              label="Preço"
                              value="#{PedidoMB.produto.preco_un}">
-                   </h:inputText>
+                   </h:inputText>-->
                   
                   <h:commandButton class="btn-success form" value="+" action="#{PedidoMB.adicionarListaProduto()}"></h:commandButton>
                   
@@ -167,6 +184,10 @@ and open the template in the editor.
                     
                 </h:dataTable>
                   
+                  <h:form><h:commandButton class="btn btn-success btn-lg" value="Salva pedido" action="#{PedidoMB.salvarPedido()}"></h:commandButton>
+                    </h:form>
+                  
+                  <br />
                    <h:messages id="msgInfo"
                             infoClass="btn btn-bg alert-success"
                             warnClass="btn btn-bg alert-warning"

@@ -63,6 +63,11 @@ public class Produtos {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
+
+    @Override
+    public String toString() {
+        return "Produtos{" + "prod_id=" + prod_id + ", data_adicionado=" + data_adicionado + ", preco_un=" + preco_un + ", nome=" + nome + ", quantidade=" + quantidade + '}';
+    }
     
     
 }

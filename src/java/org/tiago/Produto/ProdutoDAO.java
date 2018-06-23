@@ -135,7 +135,8 @@ public class ProdutoDAO {
             ResultSet myResult = myDb.setQueryParameter().executeQuery();
 
             if (myResult.next()) {
-                retorno.setNome(myResult.getString("usu_codigo"));
+                retorno.setProd_id(myResult.getInt("id_produtos"));
+                retorno.setNome(myResult.getString("nome"));
                 retorno.setPreco_un(myResult.getDouble("valor_un"));
                 retorno.setQuantidade(myResult.getInt("quantidade"));
                 
