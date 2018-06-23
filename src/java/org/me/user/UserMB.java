@@ -53,7 +53,7 @@ public class UserMB {
     public String logout(){
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("nome");
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return " ./index.xhtml?faces-redirect=true";
+        return "login";
     }
 
     public void cadastrar() throws IOException {
