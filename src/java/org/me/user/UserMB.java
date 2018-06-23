@@ -76,6 +76,10 @@ public class UserMB {
 
     }
     
+
+
+
+
     public void cadastrar() throws IOException {
         try {
             UserController userController = new UserController();

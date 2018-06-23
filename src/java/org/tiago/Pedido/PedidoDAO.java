@@ -58,15 +58,16 @@ public class PedidoDAO {
             Database MyDB = new Database();
             String sql = "INSERT INTO pedidos (cliente_cli_id, ped_valor_total, usuario_usu_id)" +
                     "VALUES (?, ?, ?);";
-            Connection connection = MyDB.preStatement.getConnection();
+            MyDB.open();
+            Connection connection = MyDB.conexao;
             PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, pedido.getCliente_cli_id());
             stmt.setDouble(2, pedido.getPed_valor_total());
             stmt.setInt(3, pedido.getVendedor_vend_id());
-            ResultSet rs = MyDB.setQueryParameter().getGeneratedKeys();
-            if (MyDB.setQueryParameter().executeUpdate() != 0 && rs.getInt(1) != 0){
-                
-                
+            stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys(); 
+            if (rs.next()){
+                  
                 idPedido = rs.getInt(1);
             }
         

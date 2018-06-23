@@ -6,7 +6,7 @@ import org.me.exception.LibraryError;
 
 public class Database {
 
-    private Connection conexao;
+    public Connection conexao;
     public Statement statement;
     public PreparedStatement preStatement;
     private String mensagem;
