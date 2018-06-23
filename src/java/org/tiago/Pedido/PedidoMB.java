@@ -33,7 +33,16 @@ public class PedidoMB {
     private Produtos produto = new Produtos();
     private int quantidadeEdit; 
     private double d_Valor_Total;
+    private int id_pedido;
 
+    public int getId_pedido() {
+        return id_pedido;
+    }
+
+    public void setId_pedido(int id_pedido) {
+        this.id_pedido = id_pedido;
+    }
+    
     public double getD_Valor_Total() {
         return d_Valor_Total;
     }
@@ -161,23 +170,7 @@ public class PedidoMB {
          RedirectMB redirectMB = new RedirectMB(url);
             
         }
-        
-        
-        public void adicionarListaProduto() throws IOException, ExceptionError{
-           
-           Produtos_Pedidos ProdutosPedidos =  new Produtos_Pedidos();
-           Produtos produtin = new Produtos();
-           ProdutosPedidos.setPedId(3);
-           ProdutosPedidos.setPreco_produto(this.produto.getPreco_un());
-           ProdutosPedidos.setProdId(this.produto.getProd_id());
-           ProdutosPedidos.setQuantidade_produto(getQuantidadeEdit());
-           produtin.setNome(this.produto.getNome());
-           ProdutosPedidos.setProdutos(produtin);
-            setD_Valor_Total(d_Valor_Total + (this.produto.getPreco_un()* getQuantidadeEdit()));
-           ListaProdutosPedidos.add(ProdutosPedidos);
             
-        }
-        
         public void excluirListaProduto(Produtos_Pedidos produto) throws IOException{
             setD_Valor_Total(d_Valor_Total - (produto.getPreco_produto()* produto.getQuantidade_produto()));
             ListaProdutosPedidos.remove(produto);
@@ -192,16 +185,30 @@ public class PedidoMB {
             
             
         }
-        
+        public void adicionarListaProduto() throws IOException, ExceptionError{
+           
+           Produtos_Pedidos ProdutosPedidos =  new Produtos_Pedidos();
+           Produtos produtin = new Produtos();
+           ProdutosPedidos.setPreco_produto(this.produto.getPreco_un());
+           ProdutosPedidos.setProdId(this.produto.getProd_id());
+           ProdutosPedidos.setQuantidade_produto(getQuantidadeEdit());
+           produtin.setNome(this.produto.getNome());
+           ProdutosPedidos.setProdutos(produtin);
+            setD_Valor_Total(d_Valor_Total + (this.produto.getPreco_un()* getQuantidadeEdit()));
+           ListaProdutosPedidos.add(ProdutosPedidos);
+            
+        }
         public void salvarPedido () throws IOException, ExceptionError{
             PedidoDAO inserir = new PedidoDAO();
             
         try {
             UserMB user = new UserMB();
             pedido.setPed_valor_total(d_Valor_Total);
-            pedido.setVendedor_vend_id(user.getSessionUser("User").getId());          
-            System.out.println("" + inserir.inserir(pedido));
-            
+            pedido.setVendedor_vend_id(user.getSessionUser("User").getId());  
+            setId_pedido(inserir.inserir(pedido));
+            if(getId_pedido() != 0){
+                salvarProdutosPedido();
+            }
         } catch (SQLException e) {
              new MessageMB("msgInfo", e.getMessage(), "", 4);
         }
@@ -211,6 +218,9 @@ public class PedidoMB {
         public void salvarProdutosPedido () throws IOException, ExceptionError{
             ProdutosPedidosDAO inserir = new ProdutosPedidosDAO();
             
+            for (Produtos_Pedidos ListaProdutosPedido : ListaProdutosPedidos) {
+                ListaProdutosPedido.setPedId(id_pedido);
+            }
             
              try {
                 if (inserir.inserirProdutos(ListaProdutosPedidos)){
