@@ -42,13 +42,13 @@ public class ClienteDAO {
                 
     }
     
-     public List<Cliente> listarCompleto() throws ExceptionError{
+    public List<Cliente> listarCompleto() throws ExceptionError{
          ArrayList<Cliente> retorno = new ArrayList<Cliente>();
 
         try {
             Database myDb = new Database();
 
-            String sql = "SELECT nome, CNPJ, end_nome, numero, CEP FROM cliente " +
+            String sql = "SELECT cli_id, nome, CNPJ, end_nome, numero, CEP FROM cliente " +
                             "inner join endereco on endereco_end_id = endereco.end_id;";
             myDb.setQuerySql(sql);
 
@@ -57,7 +57,7 @@ public class ClienteDAO {
             while(myResult.next()) {
                 Cliente clientes = new Cliente();
                 Endereco clienteEnd = new Endereco();
-                
+                clientes.setCliente_Id(myResult.getInt("cli_id"));
                 clientes.setNome(myResult.getString("nome"));
                 clientes.setCNPJ(myResult.getString("CNPJ"));
                 clienteEnd.setEnd_nome(myResult.getString("end_nome"));
@@ -78,4 +78,80 @@ public class ClienteDAO {
                 
     }
     
+    public boolean cadastro(Cliente cliente) throws ExceptionError{
+        boolean ret = false;
+        try {
+            Database myDb = new Database();
+
+            String sql = "call sp_cadastro_cliente(?, ?, ?, ?, ?, ?)";
+            myDb.setQuerySql(sql);
+            
+            myDb.setQueryParameter().setString(1, cliente.getNome());
+            myDb.setQueryParameter().setString(2, cliente.getCNPJ());
+            myDb.setQueryParameter().setString(3, cliente.getEnderecoCompleto().getEnd_nome());
+            myDb.setQueryParameter().setInt(4, cliente.getEnderecoCompleto().getEnd_numero());
+            myDb.setQueryParameter().setString(5, cliente.getEnderecoCompleto().getEnd_complemento());
+            myDb.setQueryParameter().setString(6, cliente.getEnderecoCompleto().getCEP());
+            
+            if (myDb.setQueryParameter().executeUpdate() != 0){
+                ret = true;
+               
+            }
+            myDb.setQueryParameter().close();
+        } catch (Exception e) {
+            throw new ExceptionError(e);
+        }
+        
+        return ret;
+    }
+
+    public boolean atualizar (Cliente cliente) throws ExceptionError{
+        
+        boolean ret = false;
+        try {
+            Database myDb = new Database();
+
+            String sql = "call sp_atualizar_cliente(?, ?, ?, ?, ?, ?, ?)";
+            myDb.setQuerySql(sql);
+            
+            myDb.setQueryParameter().setInt(1, cliente.getCliente_Id());
+            myDb.setQueryParameter().setString(2, cliente.getNome());
+            myDb.setQueryParameter().setString(3, cliente.getCNPJ());
+            myDb.setQueryParameter().setString(4, cliente.getEnderecoCompleto().getEnd_nome());
+            myDb.setQueryParameter().setInt(5, cliente.getEnderecoCompleto().getEnd_numero());
+            myDb.setQueryParameter().setString(6, cliente.getEnderecoCompleto().getEnd_complemento());
+            myDb.setQueryParameter().setString(7, cliente.getEnderecoCompleto().getCEP());
+        if (myDb.setQueryParameter().executeUpdate() != 0){
+                ret = true;
+               
+            }
+            myDb.setQueryParameter().close();
+        } catch (Exception e) {
+            throw new ExceptionError(e);
+        }
+        
+        return ret;
+    }
+
+    public boolean excluir (Cliente cliente) throws ExceptionError{
+        boolean ret = false;
+        try {
+            Database myDb = new Database();
+
+            String sql = "call sp_excluir_cliente(?)";
+            myDb.setQuerySql(sql);
+            
+            myDb.setQueryParameter().setInt(1, cliente.getCliente_Id());
+           
+        if (myDb.setQueryParameter().executeUpdate() != 0){
+                ret = true;
+               
+            }
+            myDb.setQueryParameter().close();
+        } catch (Exception e) {
+            throw new ExceptionError(e);
+        }
+        
+        return ret;
+    }
 }

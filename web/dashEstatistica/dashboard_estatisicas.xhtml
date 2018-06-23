@@ -6,9 +6,11 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"      
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:ui="http://java.sun.com/jsf/facelets">
    
   <head>
     <meta charset="utf-8"></meta>
@@ -43,7 +45,7 @@ and open the template in the editor.
           </li>
 
           <li>
-            <a href="index.xhtml" class="btn btn-default white"><i class="fas fa-sign-out-alt"></i></a>
+            <a href="/WebJFSMangedBenas/index.xhtml" class="btn btn-default white"><i class="fas fa-sign-out-alt"></i></a>
           </li>
         </ul>
       </div>
@@ -76,7 +78,7 @@ and open the template in the editor.
             <li class="nav-item">
               <a class="nav-link text-center " href="/WebJFSMangedBenas/dashProduto/dashboard_produto.xhtml"> <i class="fas fa-clipboard-list fa-2x m-3"></i>Produtos</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link text-center active" href="/WebJFSMangedBenas/dashEstatistica/dashboard_estatisicas.xhtml"><i class="fas fa-chart-area fa-2x m-3"></i>Estatísticas</a>
             </li>
             <li class="nav-item">
@@ -89,39 +91,16 @@ and open the template in the editor.
         
             
           <div class="container">
+              
+             
                 <h:form class="form-signin">
-                <h2 class="form-signin-heading">Produtos</h2>
+                <h2 class="form-signin-heading">Estatisticas</h2>
                 
-               
-                
-               <h:dataTable value="#{ProdutoMB.listar()}" var="linha" class="table">
-                    <h:column>
-                        <f:facet name="header">ID</f:facet>
-                        #{linha.prod_id}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Nome</f:facet>
-                        #{linha.nome}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Quantidade</f:facet>
-                        #{linha.quantidade}
-                    </h:column>
-                   <h:column>
-                        <f:facet name="header">Preço Unitário</f:facet>
-                        #{linha.preco_un}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Data Alteração</f:facet>
-                        #{linha.data_adicionado}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header"></f:facet>
-                        <h:commandButton class="btn" value="Alterar" action="#{userMB.buscar(linha)}"></h:commandButton>
-                    </h:column>
-                    
-                </h:dataTable>
-                <br />
+                         
+<!--                <p:chart type="line" model="#{GraficoAreaMB.areaModel}"
+                style="height:300px" />-->
+  
+                <iframe style="border: none" scrolling="auto" src="/WebJFSMangedBenas/newxhtml.xhtml" width="800px" height="800px"></iframe>
                  <h:messages id="msgInfo"
                             infoClass="btn btn-bg alert-success"
                             warnClass="btn btn-bg alert-warning"
@@ -133,6 +112,7 @@ and open the template in the editor.
           </div>
         
         </main>
+          
       </div>
     </div>
 

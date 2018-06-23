@@ -98,19 +98,76 @@ and open the template in the editor.
                 <br />
                 <div class="btn btn-xs btn-primary">Cliente</div>
                 <br />
-                <h:selectOneMenu class="form-control" >
+                <h:selectOneMenu class="form-control" style="width: 400px;" >
                     <f:selectItems value="#{PedidoMB.listarCliente()}"
-                                   var="cliente"
+                                   var="cliente" 
                                    itemLabel="#{cliente.nome} --- #{cliente.CNPJ}"
                                    itemValue="#{cliente.CNPJ}">
  
                     </f:selectItems>
                                    
                 </h:selectOneMenu>
-                
-                
+               
                 <br />
-                 <h:messages id="msgInfo"
+                <h4 class="form-control-plaintext">Lista de Produtos</h4>
+                
+
+                  <hr />
+                  <br />
+                  <h:selectOneMenu class="form-control " style="width: 300px;" valueChangeListener="#{PedidoMB.produto}" converter="ProdutoConverte">
+            
+                      <f:selectItems value="#{ProdutoMB.listar()}"
+                                   var="produto"                              
+                                   itemLabel="#{produto.prod_id} - #{produto.nome}"
+                                   itemValue="#{produto}">
+ 
+                    </f:selectItems>
+                                   
+                    </h:selectOneMenu> 
+                  <br />
+                  <div class="btn ">Quantidade   </div>
+                   <h:inputText id="inputQuantidade" class="form"
+                                required="required" style="width: 100px"
+                             requiredMessage="Campo Obrigatório"
+                             label="Quantidade"
+                             value="#{PedidoMB.produto.quantidade}">
+                   </h:inputText>
+                  <br />
+                   <div class="btn">Preço Unitário</div>
+                   <h:inputText id="inputPreço" class="form"
+                             required="required" style="width: 100px; text-align: right"
+                             requiredMessage="Campo Obrigatório"
+                             label="Preço"
+                             value="#{PedidoMB.produto.preco_un}">
+                   </h:inputText>
+                  
+                  <h:commandButton class="btn-success form" value="+" action="#{PedidoMB.adicionarListaProduto()}"></h:commandButton>
+                  
+                  <h:dataTable value="#{PedidoMB.listaProdutosPedidos}" var="linha" class="table">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                        #{linha.prodId}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Produto</f:facet>
+                        #{linha.produtos.nome}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Quantidade</f:facet>
+                        #{linha.quantidade_produto}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Preço Unitário (R$)</f:facet>
+                        #{linha.preco_produto}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"><h:commandButton class="btn-danger" value="Excluir TUDO" action="#{PedidoMB.excluirTudoListaProduto()}"></h:commandButton></f:facet>
+                        <h:commandButton class="btn-danger" value="Excluir" action="#{PedidoMB.excluirListaProduto(linha)}"></h:commandButton>
+                    </h:column>
+                    
+                </h:dataTable>
+                  
+                   <h:messages id="msgInfo"
                             infoClass="btn btn-bg alert-success"
                             warnClass="btn btn-bg alert-warning"
                             errorClass="btn btn-bg alert-danger"

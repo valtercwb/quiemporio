@@ -31,9 +31,7 @@ public class ProdutoDAO {
             }
             
         } catch (Exception e) {
-            
-            System.out.println("oioioioi");
-            
+                       
             throw new ExceptionError(e);
             
         }
@@ -49,7 +47,7 @@ public class ProdutoDAO {
             
         Database MyDB = new Database();            
             
-        String sql = "UPDATE produtos SET valor_un = ?, nome = ?, quantidade = ? WHERE prod_id = ?;";
+        String sql = "UPDATE produtos SET valor_un = ?, nome = ?, quantidade = ? WHERE id_produtos = ?;";
         
         MyDB.setQuerySql(sql);
         
@@ -76,7 +74,7 @@ public class ProdutoDAO {
             
             Database MyDB = new Database();
             
-            String sql = "delete from produtos where prod_id = ?";
+            String sql = "delete from produtos where id_produtos = ?";
             
             MyDB.setQuerySql(sql);
             MyDB.setQueryParameter().setInt(1, prod.getProd_id());
@@ -113,6 +111,34 @@ public class ProdutoDAO {
                 user.setData_adicionado(myResult.getTimestamp("data_adicionado"));
                 
                 retorno.add(user);
+            }
+        } catch (ExceptionError error) {
+            throw new ExceptionError(error);
+        } catch (Exception error) {
+            throw new ExceptionError(error);
+        }
+        return retorno;
+
+    }
+     
+     public Produtos buscar(int id) throws ExceptionError {
+        Produtos retorno = new Produtos();
+
+        try {
+            Database myDb = new Database();
+
+            String sql = "SELECT * FROM produtos WHERE id_produtos = ?";
+            myDb.setQuerySql(sql);
+
+            myDb.setQueryParameter().setInt(1, id);
+
+            ResultSet myResult = myDb.setQueryParameter().executeQuery();
+
+            if (myResult.next()) {
+                retorno.setNome(myResult.getString("usu_codigo"));
+                retorno.setPreco_un(myResult.getDouble("valor_un"));
+                retorno.setQuantidade(myResult.getInt("quantidade"));
+                
             }
         } catch (ExceptionError error) {
             throw new ExceptionError(error);

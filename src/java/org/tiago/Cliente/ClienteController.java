@@ -25,4 +25,26 @@ public class ClienteController {
         return clientela;
     }
     
+    public boolean cadastrar(Cliente clienteNovo) throws ExceptionError{
+        
+        ClienteDAO clienteCadastro = new ClienteDAO();
+        boolean ret = clienteCadastro.cadastro(clienteNovo);
+        return ret;
+        
+    }
+    
+    public boolean atualizar(Cliente clienteAtualizado) throws ExceptionError{
+        
+        ClienteDAO clienteAtualizar = new ClienteDAO();
+        boolean ret = clienteAtualizar.atualizar(clienteAtualizado);
+        return ret;
+        
+    }
+    
+    public boolean excluir (Cliente clienteExcluido) throws ExceptionError{
+        
+         ClienteDAO clienteExcluir = new ClienteDAO();
+        boolean ret = clienteExcluir.excluir(clienteExcluido);
+        return ret;
+    }
 }
