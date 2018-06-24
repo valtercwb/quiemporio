@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/elenice.carvalho/Documents/GitHub/quiemporio/web/index.xhtml</file>
-            <file>file:/C:/Users/elenice.carvalho/Documents/GitHub/quiemporio/src/java/org/me/Estatistica/GraficoArea.java</file>
-            <file>file:/C:/Users/elenice.carvalho/Documents/GitHub/quiemporio/src/java/org/tiago/Pedido/PedidoMB.java</file>
-            <file>file:/C:/Users/elenice.carvalho/Documents/GitHub/quiemporio/web/dashPedido/dashboard_index.xhtml</file>
-            <file>file:/C:/Users/elenice.carvalho/Documents/GitHub/quiemporio/src/java/org/me/user/UserMB.java</file>
+            <file>file:/C:/Users/elenice.carvalho/Documents/GitHub/quiemporio/src/java/org/tiago/endereco/Teste.java</file>
+            <file>file:/C:/Users/elenice.carvalho/Documents/GitHub/quiemporio/src/java/org/tiago/Cliente/ClienteMB.java</file>
+            <file>file:/C:/Users/elenice.carvalho/Documents/GitHub/quiemporio/src/java/org/tiago/endereco/ViaCEP.java</file>
+            <file>file:/C:/Users/elenice.carvalho/Documents/GitHub/quiemporio/web/dashCli/dashboard_clientes_cadastrar.xhtml</file>
         </group>
     </open-files>
 </project-private>

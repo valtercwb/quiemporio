@@ -83,7 +83,7 @@ public class ClienteDAO {
         try {
             Database myDb = new Database();
 
-            String sql = "call sp_cadastro_cliente(?, ?, ?, ?, ?, ?)";
+            String sql = "call sp_cadastro_cliente(?, ?, ?, ?, ?, ?, ?, ?, ?)";
             myDb.setQuerySql(sql);
             
             myDb.setQueryParameter().setString(1, cliente.getNome());
@@ -91,7 +91,10 @@ public class ClienteDAO {
             myDb.setQueryParameter().setString(3, cliente.getEnderecoCompleto().getEnd_nome());
             myDb.setQueryParameter().setInt(4, cliente.getEnderecoCompleto().getEnd_numero());
             myDb.setQueryParameter().setString(5, cliente.getEnderecoCompleto().getEnd_complemento());
-            myDb.setQueryParameter().setString(6, cliente.getEnderecoCompleto().getCEP());
+            myDb.setQueryParameter().setString(6, cliente.getEnderecoCompleto().getCEP());            
+            myDb.setQueryParameter().setString(7, cliente.getEnderecoCompleto().getBairro());
+            myDb.setQueryParameter().setString(8, cliente.getEnderecoCompleto().getCidade());
+            myDb.setQueryParameter().setString(9, cliente.getEnderecoCompleto().getUf());
             
             if (myDb.setQueryParameter().executeUpdate() != 0){
                 ret = true;
@@ -121,6 +124,9 @@ public class ClienteDAO {
             myDb.setQueryParameter().setInt(5, cliente.getEnderecoCompleto().getEnd_numero());
             myDb.setQueryParameter().setString(6, cliente.getEnderecoCompleto().getEnd_complemento());
             myDb.setQueryParameter().setString(7, cliente.getEnderecoCompleto().getCEP());
+            myDb.setQueryParameter().setString(8, cliente.getEnderecoCompleto().getBairro());
+            myDb.setQueryParameter().setString(9, cliente.getEnderecoCompleto().getCidade());
+            myDb.setQueryParameter().setString(10, cliente.getEnderecoCompleto().getUf());
         if (myDb.setQueryParameter().executeUpdate() != 0){
                 ret = true;
                

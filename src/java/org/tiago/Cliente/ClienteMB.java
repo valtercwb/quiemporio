@@ -1,22 +1,29 @@
 
 package org.tiago.Cliente;
 
+import br.com.parg.viacep.ViaCEP;
+import br.com.parg.viacep.ViaCEPEvents;
+import br.com.parg.viacep.ViaCEPException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import org.me.exception.ExceptionError;
 import org.me.util.MessageMB;
 import org.me.util.RedirectMB;
 import org.me.util.SessionMB;
+import static org.primefaces.component.calendar.Calendar.PropertyKeys.locale;
 import org.tiago.endereco.Endereco;
 
 @ManagedBean (name = "ClienteMB")
 @SessionScoped
-public class ClienteMB {
-    
+public class ClienteMB implements ViaCEPEvents{
+       
     private SessionMB sessionMB = new SessionMB();
     private Cliente clientela = new Cliente();
     private Endereco endereco = new Endereco();
@@ -123,10 +130,37 @@ public class ClienteMB {
     } 
      
     public void limparObjeto(){
-    
-       
          String url = "/dashCli/dashboard_clientes_cadastrar.xhtml";
 
             RedirectMB redirectMB = new RedirectMB(url);       
+    }
+    
+    public void buscarEndereco(String cep) {
+        System.out.println("Pressed enter!");
+        ViaCEP viaCEP = new ViaCEP(this);
+            if (!cep.equals("")) {
+                try {
+                    viaCEP.buscar(cep);
+                } catch (ViaCEPException ex) {
+                    System.err.println("Ocorreu um erro na classe " + ex.getClasse() + ": " + ex.getMessage());
+                }
+            }
+    }
+    
+    @Override
+    public void onCEPSuccess(ViaCEP cep) {
+        this.endereco.setEnd_nome(cep.getLogradouro());
+        this.endereco.setBairro(cep.getBairro());
+        this.endereco.setCidade(cep.getLocalidade());
+        this.endereco.setUf(cep.getUf());
+         String url = "/dashCli/dashboard_clientes_cadastrar.xhtml";
+         RedirectMB redirectMB = new RedirectMB(url); 
+    }
+
+    @Override
+    public void onCEPError(String cep) {
+        System.out.println();
+        System.out.println("Não foi possível encontrar o CEP " + cep + "!");
+        System.out.println();
     }
 }

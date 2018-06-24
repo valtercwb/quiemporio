@@ -22,7 +22,7 @@ public class Database {
             driver = "com.mysql.fabric.jdbc.FabricMySQLDriver";
             url = "jdbc:mysql://localhost/quiemporio";
             usuario = "root";
-            senha = "unicuritiba";
+            senha = "2429";
 
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 

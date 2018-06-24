@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import org.me.exception.ExceptionError;
 import org.me.util.MessageMB;
 import org.me.util.RedirectMB;
@@ -76,15 +77,12 @@ public class UserMB {
 
     }
     
-<<<<<<< HEAD
-    public String logout(){
+    public String logout2() {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("nome");
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "login";
     }
 
-=======
->>>>>>> 407772a976b3f31d0a0964442b3aabb30fbcbb52
     public void cadastrar() throws IOException {
         try {
             UserController userController = new UserController();
