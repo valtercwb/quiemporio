@@ -6,13 +6,14 @@ import org.me.exception.LibraryError;
 
 public class Database {
 
-    private Connection conexao;
-    private Statement statement;
+    public Connection conexao;
+    public Statement statement;
     public PreparedStatement preStatement;
     private String mensagem;
 
     //--------------------------------------------------------------------------
     public void open() throws ExceptionError {
+        
         try {
             String driver;
             String url;

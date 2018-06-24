@@ -77,12 +77,19 @@ public class UserMB {
 
     }
     
+<<<<<<< HEAD
     public String logout2() {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("nome");
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "login";
     }
 
+=======
+
+
+
+
+>>>>>>> b457254db38df30b4a1f3c22b1c7c21555bc9dff
     public void cadastrar() throws IOException {
         try {
             UserController userController = new UserController();

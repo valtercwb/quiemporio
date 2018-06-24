@@ -91,16 +91,30 @@ and open the template in the editor.
         
             
           <div class="container">
-              
-             
+              <h2 class="form-signin-heading">Estatisticas</h2>
+             <iframe style="border: none" scrolling="auto" src="/WebJFSMangedBenas/newxhtml.xhtml" width="800px" height="350px"></iframe>
                 <h:form class="form-signin">
-                <h2 class="form-signin-heading">Estatisticas</h2>
+                
                 
                          
 <!--                <p:chart type="line" model="#{GraficoAreaMB.areaModel}"
                 style="height:300px" />-->
-  
-                <iframe style="border: none" scrolling="auto" src="/WebJFSMangedBenas/newxhtml.xhtml" width="800px" height="800px"></iframe>
+                    
+                 <div class="btn btn-xs btn-primary">Data inicio</div> 
+                 <h:inputText id="periodoInicial"  style="width: 100px; text-align: right;float: left; " 
+                                class="form-control"
+                               value="#{EstatisticaMB.periodoInicial.time}">
+                     <f:convertDateTime type="date" pattern="dd/mm/yyyy" />
+                </h:inputText>
+              
+                  <div class="btn btn-xs btn-primary">Data Fim</div>
+                 <h:inputText id="inputComp" style="; width: 100px; text-align: right;" 
+                               class="form-control"
+                              
+                               value="#{EstatisticaMB.periodoFinal.time}">
+                     <f:convertDateTime type="date" pattern="dd/mm/yyyy" />
+                </h:inputText>
+                
                  <h:messages id="msgInfo"
                             infoClass="btn btn-bg alert-success"
                             warnClass="btn btn-bg alert-warning"

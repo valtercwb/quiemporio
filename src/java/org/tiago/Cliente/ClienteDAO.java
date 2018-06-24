@@ -27,7 +27,7 @@ public class ClienteDAO {
             while(myResult.next()) {
                 Cliente clientes = new Cliente();
                 
-                
+                clientes.setCliente_Id(myResult.getInt("cli_id"));
                 clientes.setNome(myResult.getString("nome"));
                 clientes.setCNPJ(myResult.getString("CNPJ"));
  

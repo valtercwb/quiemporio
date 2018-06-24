@@ -46,12 +46,14 @@ and open the template in the editor.
             <a class="nav-link font-weight-bold" href="#">Perfil</a>
           </li>
   
-          
-             <h:form> <h:commandButton class="btn btn-default white" action="#{userMB.logout()}"></h:commandButton></h:form>
+            <li>
+            <a href="index.xhtml" class="btn btn-default white"><i class="fas fa-sign-out-alt"></i></a>
+          </li>
+            
           
         </ul>
       </div>
-    </nav>     
+    </nav>
     <div class="row d-lg-none">
         <div class="container-fluid">
             <ul class="nav">
@@ -96,10 +98,7 @@ and open the template in the editor.
                 <h:form class="form-signin">
                 <h2 class="form-signin-heading">Pedidos cadastrados</h2> 
                 <h:dataTable value="#{PedidoMB.listar()}" var="linha" class="table">
-                    <h:column>
-                        <f:facet name="header">ID</f:facet>
-                        #{linha.ped_id}
-                    </h:column>
+                   
                     <h:column>
                         <f:facet name="header">Cliente</f:facet>
                         #{linha.cliente.nome}
@@ -118,7 +117,14 @@ and open the template in the editor.
                     </h:column>
                     <h:column>
                         <f:facet name="header"></f:facet>
-                        <h:commandButton class="btn" value="Alterar" action="#{userMB.buscar(linha)}"></h:commandButton>
+                        <h:commandButton class="btn btn-info" value="Info" action="#{userMB.buscar(linha)}"></h:commandButton>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"></f:facet>
+                        <h:commandButton class="btn btn-warning" value="Alterar" action="#{userMB.buscar(linha)}"></h:commandButton>
+                    </h:column>
+                     <h:column>
+                         <h:commandButton class="btn btn-danger" value="Excluir" action="#{PedidoMB.excluirPedido(linha)}"></h:commandButton>
                     </h:column>
                     
                 </h:dataTable>
@@ -135,9 +141,10 @@ and open the template in the editor.
           </div>
             
             <div class="col-xl-12 offset-xl-1 col-lg-12 offset-lg-1 col-md-12 offset-md-1 col-sm-12 offset-sm-1 mt-3">
-                 <a href="/WebJFSMangedBenas/dashCli/dashboard_clientes_cadastrar.xhtml">
+                
                      <h:form><h:commandButton class="btn btn-danger btn-lg" value="Inserir" action="#{PedidoMB.limparObjeto()}"></h:commandButton>
-                    </h:form></a>
+                    </h:form>
+               
             </div>
         </main>
       </div>
