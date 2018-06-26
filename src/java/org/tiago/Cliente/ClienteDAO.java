@@ -48,8 +48,9 @@ public class ClienteDAO {
         try {
             Database myDb = new Database();
 
-            String sql = "SELECT cli_id, nome, CNPJ, end_nome, numero, CEP FROM cliente " +
-                            "inner join endereco on endereco_end_id = endereco.end_id;";
+            String sql = "SELECT cli_id, nome, CNPJ, end_nome, numero, CEP, complemento,"
+                       + "bairro, cidade, uf FROM cliente " 
+                       + "inner join endereco on endereco_end_id = endereco.end_id;";
             myDb.setQuerySql(sql);
 
             ResultSet myResult = myDb.setQueryParameter().executeQuery();
@@ -63,10 +64,11 @@ public class ClienteDAO {
                 clienteEnd.setEnd_nome(myResult.getString("end_nome"));
                 clienteEnd.setEnd_numero(myResult.getInt("numero"));
                 clienteEnd.setCEP(myResult.getString("CEP"));
-           
+                clienteEnd.setEnd_complemento(myResult.getString("complemento"));
+                clienteEnd.setBairro(myResult.getString("bairro"));
+                clienteEnd.setCidade(myResult.getString("cidade"));
+                clienteEnd.setUf(myResult.getString("uf"));
                 clientes.setEnderecoCompleto(clienteEnd);
-                
-
                 retorno.add(clientes);
             }
         } catch (ExceptionError error) {
@@ -114,7 +116,7 @@ public class ClienteDAO {
         try {
             Database myDb = new Database();
 
-            String sql = "call sp_atualizar_cliente(?, ?, ?, ?, ?, ?, ?)";
+            String sql = "call sp_atualizar_cliente(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             myDb.setQuerySql(sql);
             
             myDb.setQueryParameter().setInt(1, cliente.getCliente_Id());

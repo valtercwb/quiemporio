@@ -136,7 +136,6 @@ public class ClienteMB implements ViaCEPEvents{
     }
     
     public void buscarEndereco(String cep) {
-        System.out.println("Pressed enter!");
         ViaCEP viaCEP = new ViaCEP(this);
             if (!cep.equals("")) {
                 try {
