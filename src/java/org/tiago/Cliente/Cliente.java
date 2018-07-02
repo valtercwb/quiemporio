@@ -11,6 +11,16 @@ public class Cliente {
     private String CNPJ;
     private String CPF;
     private Endereco enderecoCompleto ;
+    private int usu_id; 
+
+    public int getUsu_id() {
+        return usu_id;
+    }
+
+    public void setUsu_id(int usu_id) {
+        this.usu_id = usu_id;
+    }
+
 
     public Endereco getEnderecoCompleto() {
         return enderecoCompleto;
@@ -62,9 +72,5 @@ public class Cliente {
 
     public void setCPF(String CPF) {
         this.CPF = CPF;
-    }
-    
-    
-    
-    
+    }    
 }

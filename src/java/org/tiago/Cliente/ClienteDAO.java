@@ -42,17 +42,16 @@ public class ClienteDAO {
                 
     }
     
-    public List<Cliente> listarCompleto() throws ExceptionError{
+    public List<Cliente> listarCompleto() throws ExceptionError {
          ArrayList<Cliente> retorno = new ArrayList<Cliente>();
 
         try {
             Database myDb = new Database();
 
-            String sql = "SELECT cli_id, nome, CNPJ, end_nome, numero, CEP, complemento,"
-                       + "bairro, cidade, uf FROM cliente " 
-                       + "inner join endereco on endereco_end_id = endereco.end_id;";
+             String sql = "SELECT cli_id, nome, CNPJ, end_nome, numero, CEP,complemento,bairro,cidade,uf FROM cliente \n" +
+             "inner join endereco on endereco_end_id = endereco.end_id";
             myDb.setQuerySql(sql);
-
+            // myDb.setQueryParameter().setInt(1, id);
             ResultSet myResult = myDb.setQueryParameter().executeQuery();
 
             while(myResult.next()) {
@@ -77,7 +76,6 @@ public class ClienteDAO {
             throw new ExceptionError(error);
         }
         return retorno;
-                
     }
     
     public boolean cadastro(Cliente cliente) throws ExceptionError{
@@ -97,7 +95,7 @@ public class ClienteDAO {
             myDb.setQueryParameter().setString(7, cliente.getEnderecoCompleto().getBairro());
             myDb.setQueryParameter().setString(8, cliente.getEnderecoCompleto().getCidade());
             myDb.setQueryParameter().setString(9, cliente.getEnderecoCompleto().getUf());
-            
+           //  myDb.setQueryParameter().setInt(10, cliente.getUsu_id());
             if (myDb.setQueryParameter().executeUpdate() != 0){
                 ret = true;
                

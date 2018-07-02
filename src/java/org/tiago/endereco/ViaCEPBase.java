@@ -4,7 +4,7 @@
  * 
  * Obtem um CEP no ViaCEP
  */
-package br.com.parg.viacep;
+package org.tiago.endereco;
 
 import java.io.BufferedReader;
 import java.io.IOException;

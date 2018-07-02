@@ -86,7 +86,7 @@
         
             
           <div class="container">
-                <h:form class="form-signin">
+                <h:form class="form01">
                 <h2 class="form-signin-heading">Cadastro de Clientes</h2>
                 
                 <div class="btn btn-xs btn-primary">Nome</div>
@@ -110,104 +110,100 @@
                 <br />
                 <h4 class="form-signin-heading">Endereço</h4>
             <table>
-                <tr>
-                    <td>
-                        <div class="btn btn-xs btn-primary " style="float: left;">CEP</div>
-                        <h:inputText id="inputComplemento" class="form-control" style="width: 50%;" 
-                                     required="required"
-                                     value="#{ClienteMB.endereco.CEP}"
-                                     onkeypress="if (event.keyCode == 13) {return false;}">
-                            <f:ajax event="change" listener="#{ClienteMB.buscarEndereco(ClienteMB.endereco.CEP)}"></f:ajax>
-                        </h:inputText>
-                    </td>                                
-                    <td>
-                        <div class="btn btn-xs btn-primary" style="float: left;width:100px;">Logradouro</div>
-                        <h:inputText id="inputRua" class="form-control" 
-                                     style="width: 300px;float: left; display: table; margin: 0 auto; position: relative;"
-                                     required="required"
-                                     value="#{ClienteMB.endereco.end_nome}">
-                        </h:inputText>
-                    </td>
-                       <td></td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="btn btn-xs btn-primary" style="float: left;">Nº</div>        
-                        <h:inputText id="inputNumero" style="max-width: 80px; text-align: right;float: left; display: table; margin: 0 auto; position: relative;" 
-                                     required="required"
-                                     class="form-control"
-                                     value="#{ClienteMB.endereco.end_numero}">
-                        </h:inputText> 
-                    </td>                        
-                    <td>    
-                        <div class="btn btn-xs btn-primary  " style="float: left; width:120px;">Complemento</div>   
-                        <h:inputText id="inputComp" style="; width: 200px;" 
-                                     required="required" class="form-control"
-                                     value="#{ClienteMB.endereco.end_complemento}">
-                        </h:inputText>
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-
-                 <tr>
-                    <td>
-                        <div class="btn btn-xs btn-primary" style="float: left;">Bairro</div>        
-                        <h:inputText id="inputBairro" style="max-width: 150px; float: left; display: table; margin: 0 auto; position: relative;" 
-                                     required="required"
-                                     label="Senha" class="form-control"
-                                     value="#{ClienteMB.endereco.bairro}">
-                        </h:inputText> 
-                    </td>                        
-                    <td>    
-                        <div class="btn btn-xs btn-primary  " style="float: left; width:100px;">Cidade</div>   
-                        <h:inputText id="inputCidade" style="; width: 200px;" 
-                                     required="required" class="form-control"
-                                     label="Senha"
-                                     value="#{ClienteMB.endereco.cidade}">
-                        </h:inputText>
-                    </td>
-                     <td>    
-                        <div class="btn btn-xs btn-primary  " style="float: left; width:30px;">UF</div>   
-                        <h:inputText id="inputUF" style="; width: 100px;" 
-                                     required="required" class="form-control"
-                                     label="Senha"
-                                     value="#{ClienteMB.endereco.uf}">
-                        </h:inputText>
-                    </td>
-                </tr>
-            <tr>
-                <td>
-                    <h:commandButton class="btn btn-danger btn-lg btn-primary btn-block" style="width: 50%;" value="Atualizar" action="#{ClienteMB.atualizar()}">
-                    </h:commandButton>
-                </td>                                    
-                <td>
-                    <a href="/WebJFSMangedBenas/dashCli/dashboard_clientes.xhtml" class="btn-warning btn-lg">
-                      Retornar 
-                    </a>
-                </td>
-            </tr>
-                <tr>
-                    <td>
-                        <h:messages id="msgInfo"
-                        infoClass="btn btn-bg alert-success"
-                        warnClass="btn btn-bg alert-warning"
-                        errorClass="btn btn-bg alert-danger"
-                        fatalClass="btn btn-bg alert-danger"
-                        globalOnly="false"
-                        />
-                    </td>
-                </tr>
-            </table>            
+                                <tr>
+                                    <td>
+                                        <div class="btn btn-xs btn-primary " style="float: left;">CEP</div>
+                                        <h:inputText id="inputComplemento" class="form-control" style="width: 50%;" 
+                                                     required="required"
+                                                     value="#{ClienteMB.endereco.CEP}"
+                                                     onkeypress="if (event.keyCode == 13) {return false;}">
+                                            <f:ajax event="change" execute=":form01" listener="#{ClienteMB.buscarEndereco(ClienteMB.endereco.CEP)}" render=":form01 inputRua inputBairro inputCidade inputUF"></f:ajax>
+                                        </h:inputText>
+                                    </td>                                
+                                    <td>
+                                        <div class="btn btn-xs btn-primary" style="float: left;width:50px;">Rua</div>
+                                        <h:inputText id="inputRua" class="form-control" 
+                                                     style="width: 300px;float: left; display: table; margin: 0 auto; position: relative;"
+                                                     required="required"
+                                                     value="#{ClienteMB.endereco.end_nome}">
+                                        </h:inputText>
+                                    </td>
+                                       <td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="btn btn-xs btn-primary" style="float: left;">Nº</div>        
+                                        <h:inputText id="inputNumero" style="max-width: 80px; text-align: right;float: left; display: table; margin: 0 auto; position: relative;" 
+                                                     required="required"
+                                                     class="form-control"
+                                                     value="#{ClienteMB.endereco.end_numero}">
+                                        </h:inputText> 
+                                    </td>                        
+                                    <td>    
+                                        <div class="btn btn-xs btn-primary  " style="float: left; width:120px;">Complemento</div>   
+                                        <h:inputText id="inputComp" style="; width: 200px;" 
+                                                     required="required" class="form-control"
+                                                     value="#{ClienteMB.endereco.end_complemento}">
+                                        </h:inputText>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                
+                                 <tr>
+                                    <td>
+                                        <div class="btn btn-xs btn-primary" style="float: left;">Bairro</div>        
+                                        <h:inputText id="inputBairro" style="max-width: 150px; float: left; display: table; margin: 0 auto; position: relative;" 
+                                                     required="required"
+                                                     label="Senha" class="form-control"
+                                                     value="#{ClienteMB.endereco.bairro}">
+                                        </h:inputText> 
+                                    </td>                        
+                                    <td>    
+                                        <div class="btn btn-xs btn-primary  " style="float: left; width:100px;">Cidade</div>   
+                                        <h:inputText id="inputCidade" style="; width: 200px;" 
+                                                     required="required" class="form-control"
+                                                     label="Senha"
+                                                     value="#{ClienteMB.endereco.cidade}">
+                                        </h:inputText>
+                                    </td>
+                                     <td>    
+                                        <div class="btn btn-xs btn-primary  " style="float: left; width:30px;">UF</div>   
+                                        <h:inputText id="inputUF" style="; width: 100px;" 
+                                                     required="required" class="form-control"
+                                                     label="Senha"
+                                                     value="#{ClienteMB.endereco.uf}">
+                                        </h:inputText>
+                                    </td>
+                                </tr>
+                            <tr>
+                                <td>
+                                    <h:commandButton class="btn btn-lg btn-danger" style="width: 60%;" value="Cadastrar" action="#{ClienteMB.cadastrar()}"></h:commandButton>
+                                </td>                                    
+                                <td>
+                                    <h:commandButton class="btn btn-warning " style="width: 60%;" value="Retornar" action="#{ClienteMB.limparObjeto()}"></h:commandButton>
+                                </td>
+                            </tr>
+                                <tr>
+                                    <td>
+                                        <h:messages id="msgInfo"
+                                        infoClass="btn btn-bg alert-success"
+                                        warnClass="btn btn-bg alert-warning"
+                                        errorClass="btn btn-bg alert-danger"
+                                        fatalClass="btn btn-bg alert-danger"
+                                        globalOnly="false"
+                                        />
+                                    </td>
+                                </tr>
+                            </table>
                                  
-                <!--<br />
+                <br />
                  <h:messages id="msgInfo"
                             infoClass="btn btn-bg alert-success"
                             warnClass="btn btn-bg alert-warning"
                             errorClass="btn btn-bg alert-danger"
                             fatalClass="btn btn-bg alert-danger"
                             globalOnly="false"
-                            />-->
+                            />
             </h:form>
           </div>
         </main>

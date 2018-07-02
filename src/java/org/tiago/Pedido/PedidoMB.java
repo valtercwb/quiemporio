@@ -119,18 +119,17 @@ public class PedidoMB {
        } 
         
        public List<Pedido> listar() throws IOException {
-        List pedidoList = new ArrayList<Pedido>();
-        UserMB user = new UserMB();
         try {
+            List pedidoList = new ArrayList<Pedido>();
+            UserMB user = new UserMB();
             PedidoController pedidoController = new PedidoController();
-
-            pedidoList = pedidoController.listar(user.getSessionUser("user").getId());
-
-        } catch (ExceptionError error) {
-            new MessageMB("msgInfo", error.getMessage(), "", 4);
+            pedidoList = pedidoController.listar();
+            
+            return pedidoList;
+        } catch (ExceptionError ex) {
+            Logger.getLogger(PedidoMB.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-
-        return pedidoList;
     }
        public List<Cliente> listarCliente() throws IOException{
             List pedidoList = new ArrayList<Cliente>();
@@ -204,7 +203,7 @@ public class PedidoMB {
         try {
             UserMB user = new UserMB();
             pedido.setPed_valor_total(d_Valor_Total);
-            pedido.setVendedor_vend_id(user.getSessionUser("User").getId());  
+            //pedido.setVendedor_vend_id(user.getSessionUser("User").getId());  
             setId_pedido(inserir.inserir(pedido));
             if(getId_pedido() != 0){
                 salvarProdutosPedido();

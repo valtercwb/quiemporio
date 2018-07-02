@@ -1,19 +1,23 @@
 
 package org.tiago.Cliente;
-
-import br.com.parg.viacep.ViaCEP;
-import br.com.parg.viacep.ViaCEPEvents;
-import br.com.parg.viacep.ViaCEPException;
+import static java.nio.charset.StandardCharsets.*;
+import org.tiago.endereco.ViaCEP;
+import org.tiago.endereco.ViaCEPEvents;
+import org.tiago.endereco.ViaCEPException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import org.me.exception.ExceptionError;
+import org.me.user.UserMB;
 import org.me.util.MessageMB;
 import org.me.util.RedirectMB;
 import org.me.util.SessionMB;
@@ -37,6 +41,7 @@ public class ClienteMB implements ViaCEPEvents{
     }
 
     public ClienteMB() {
+      
     }
 
         
@@ -49,24 +54,28 @@ public class ClienteMB implements ViaCEPEvents{
     }
     
     public List<Cliente> listar() throws IOException {
-        List clienteList = new ArrayList<Cliente>();
-
         try {
+            List clienteList = new ArrayList<Cliente>();
+            UserMB user = new UserMB();
             ClienteController clienteController = new ClienteController();
-
             clienteList = clienteController.listarTudo();
-
-        } catch (ExceptionError error) {
-            new MessageMB("msgInfo", error.getMessage(), "", 4);
+            if(clienteList!=null){
+            return clienteList;
+            }else{
+             return null;
+            }
+        } catch (ExceptionError ex) {
+            Logger.getLogger(ClienteMB.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-
-        return clienteList;
-        }
+    }
     
     public void cadastrar() throws IOException{
         
         try {
+            UserMB user = new UserMB();
             ClienteController clienteCadastro = new ClienteController();
+            clientela.setUsu_id(user.getSessionUser("user").getId());
             this.clientela.setEnderecoCompleto(this.endereco);
             if(clienteCadastro.cadastrar(this.clientela)){
                  new MessageMB("msgInfo", "Cliente cadastro!", "", 1);
@@ -127,19 +136,34 @@ public class ClienteMB implements ViaCEPEvents{
         } catch (Exception e) {
             new MessageMB("msgInfo", e.getMessage(), "", 3);
         }
-    } 
+    }
+    
+     public void RedirectToCadastro(){
+        String url = "/dashCli/dashboard_clientes_cadastrar.xhtml";
+        RedirectMB redirectMB = new RedirectMB(url);       
+    }
      
     public void limparObjeto(){
-         String url = "/dashCli/dashboard_clientes_cadastrar.xhtml";
-
-            RedirectMB redirectMB = new RedirectMB(url);       
+        this.endereco.setEnd_nome("");
+        this.endereco.setBairro("");
+        this.endereco.setCidade("");
+        this.endereco.setUf("");
+        this.endereco.setEnd_complemento("");
+        this.endereco.setEnd_numero(0);
+        this.endereco.setCEP("");
+        this.clientela.setCNPJ("");
+        this.clientela.setNome("");
+        String url = "/dashCli/dashboard_clientes.xhtml";
+        RedirectMB redirectMB = new RedirectMB(url);       
     }
     
     public void buscarEndereco(String cep) {
+        
         ViaCEP viaCEP = new ViaCEP(this);
             if (!cep.equals("")) {
                 try {
                     viaCEP.buscar(cep);
+                                       
                 } catch (ViaCEPException ex) {
                     System.err.println("Ocorreu um erro na classe " + ex.getClasse() + ": " + ex.getMessage());
                 }
@@ -148,12 +172,26 @@ public class ClienteMB implements ViaCEPEvents{
     
     @Override
     public void onCEPSuccess(ViaCEP cep) {
-        this.endereco.setEnd_nome(cep.getLogradouro());
-        this.endereco.setBairro(cep.getBairro());
-        this.endereco.setCidade(cep.getLocalidade());
+        String logradouro = cep.getLogradouro();        
+        String bairro = cep.getBairro();
+        String cidade = cep.getLocalidade();
+
+        byte[] loByte;         
+        byte[] baByte; 
+        byte[] ciByte; 
+
+        loByte = logradouro.getBytes(ISO_8859_1);            
+        baByte = bairro.getBytes(ISO_8859_1);
+        ciByte = cidade.getBytes(ISO_8859_1);
+        String logradouroEncoded = new String(loByte, UTF_8);        
+        String bairroEncoded = new String(baByte, UTF_8);
+        String cidadeEncoded = new String(ciByte, UTF_8);
+        this.endereco.setEnd_nome(logradouroEncoded);
+        this.endereco.setBairro(bairroEncoded);
+        this.endereco.setCidade(cidadeEncoded);
         this.endereco.setUf(cep.getUf());
-         String url = "/dashCli/dashboard_clientes_cadastrar.xhtml";
-         RedirectMB redirectMB = new RedirectMB(url); 
+//        String url = "/dashCli/dashboard_clientes_cadastrar.xhtml";
+//        RedirectMB redirectMB = new RedirectMB(url);
     }
 
     @Override
@@ -162,4 +200,22 @@ public class ClienteMB implements ViaCEPEvents{
         System.out.println("Não foi possível encontrar o CEP " + cep + "!");
         System.out.println();
     }
+	private static List<Cliente> data = new ArrayList<Cliente>();
+//	static {
+//		data.add(new Cliente("Egypt" , "Cairo, Egypt", "Africa"));
+//		data.add(new Cliente("Germany" , "Berlin, Germany", "Europe"));
+//		data.add(new Cliente("Austria" , "Vienna, Austria", "Europe"));
+//		data.add(new Cliente("US" , "Washington, USA", "North America"));
+//		data.add(new Cliente("China" , "Beijing, China", "Asia"));
+//		data.add(new Cliente("Brazil" , "Brazilia, Brazil", "South America"));		
+//	}
+
+	public List<Cliente> getData() {
+		return data;
+	}
+
+	public void setData(List<Cliente> data) {
+		this.data = data;
+	}	
+    
 }

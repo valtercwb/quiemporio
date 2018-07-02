@@ -10,10 +10,10 @@ import org.tiago.ProdutosPedidos.Produtos_Pedidos;
 
 public class PedidoController {
     
-    public List<Pedido> listar(int id) throws ExceptionError{
+    public List<Pedido> listar() throws ExceptionError{
         
         PedidoDAO pedido = new PedidoDAO();
-        List pedidos = pedido.listar(id);
+        List pedidos = pedido.listar();
         
         return pedidos;
     }

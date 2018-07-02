@@ -16,15 +16,7 @@ public class ClienteController {
         
         return clientes;
     }
-    
-    public List<Cliente> listarTudo() throws ExceptionError{
         
-        ClienteDAO clientes = new ClienteDAO();
-        List clientela = clientes.listarCompleto();
-        
-        return clientela;
-    }
-    
     public boolean cadastrar(Cliente clienteNovo) throws ExceptionError{
         
         ClienteDAO clienteCadastro = new ClienteDAO();
@@ -46,5 +38,13 @@ public class ClienteController {
          ClienteDAO clienteExcluir = new ClienteDAO();
         boolean ret = clienteExcluir.excluir(clienteExcluido);
         return ret;
+    }
+
+    List<Cliente> listarTudo() throws ExceptionError{
+        
+        ClienteDAO clientes = new ClienteDAO();
+        List clientela = clientes.listarCompleto();
+        
+        return clientela;
     }
 }

@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
@@ -100,16 +96,14 @@ and open the template in the editor.
                 <h2 class="form-signin-heading">Inserir Pedido</h2>
                 <br />
                 <div class="btn btn-xs btn-primary">Cliente</div>
-                <br />
-                <h:selectOneMenu class="form-control" style="width: 400px;" value="#{PedidoMB.pedido.cliente_cli_id}" >
+                <h:selectOneMenu class="form-control flex-column" style="width: 50%;" value="#{PedidoMB.pedido.cliente_cli_id}" >
                     <f:selectItem itemLabel="Selecione" itemValue="" />  
                     <f:selectItems value="#{PedidoMB.listarCliente()}"
                                    var="cliente" 
                                    itemLabel="#{cliente.nome} --- #{cliente.CNPJ}"
                                    itemValue="#{cliente.cliente_Id}">
  
-                    </f:selectItems>
-                                   
+                    </f:selectItems>  
                 </h:selectOneMenu>
                
                 <br />
@@ -149,7 +143,7 @@ and open the template in the editor.
                   
                   <div class="btn "> Total</div> 
                   <h:outputText id="OutputValor" class="form btn-lg btn-outline-success" value="R$ #{PedidoMB.d_Valor_Total}"></h:outputText>
-                  <br />
+                 
 <!--                   <div class="btn">Preço Unitário</div>-->
 <!--                   <h:inputText id="inputPreço" class="form"
                              required="required" style="width: 100px; text-align: right"
@@ -158,9 +152,9 @@ and open the template in the editor.
                              value="#{PedidoMB.produto.preco_un}">
                    </h:inputText>-->
                   
-                  <h:commandButton class="btn-success form" value="+" action="#{PedidoMB.adicionarListaProduto()}"></h:commandButton>
+                  <h:commandButton class="btn-success btn-lg form font-weight-bold" value="+" action="#{PedidoMB.adicionarListaProduto()}"></h:commandButton>
                   
-                  <h:dataTable value="#{PedidoMB.listaProdutosPedidos}" var="linha" class="table">
+                  <h:dataTable value="#{PedidoMB.listaProdutosPedidos}" var="linha" class="table margin-top-20">
                     <h:column>
                         <f:facet name="header">ID</f:facet>
                         #{linha.prodId}

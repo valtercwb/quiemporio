@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <!DOCTYPE html>
 <html lang="pt-BR"
@@ -7,7 +7,7 @@
       xmlns:h="http://java.sun.com/jsf/html">
     <f:view contentType="text/html;" locale="pt-BR">
     <h:head>
-        <meta charset="ISO-8859-1"></meta>
+        <meta http-equiv="contentType" content="text/html" charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
         <meta name="description" content=""></meta>
         <meta name="author" content=""></meta>
@@ -74,7 +74,7 @@
                             <a class="nav-link text-center " href="/WebJFSMangedBenas/dashProduto/dashboard_produto.xhtml"> <i class="fas fa-cubes fa-2x m-3"></i>Produtos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-center " href="/WebJFSMangedBenas/dashEstatistica/dashboard_estatisicas.xhtml"><i class="fas fa-chart-area fa-2x m-3"></i>Estatísticas</a>
+                            <a class="nav-link text-center " href="/WebJFSMangedBenas/dashEstatistica/dashboard_estatisicas.xhtml"><i class="fas fa-chart-area fa-2x m-3"></i>EstatÃ­sticas</a>
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link text-center active" href="/WebJFSMangedBenas/dashCli/dashboard_clientes.xhtml"><i class="fa fa-user-circle fa-2x m-3"></i>Cliente</a>
@@ -86,18 +86,16 @@
 
 
                     <div class="container">
-                        <h:form class="form-signin" acceptcharset="ISO-8859-1">
+                        <h:form id="form01" class="form-signin">
                             <h2 class="form-signin-heading">Cadastro de Clientes</h2>
 
                             <div class="btn btn-xs btn-primary">Nome</div>
                             <h:inputText id="inputNome" class="form-control"
                                          style="width: 40%;"
                                          required="required"
-                                         requiredMessage="Campo Obrigatório"
+                                         requiredMessage="Campo ObrigatÃ³rio"
                                          value="#{ClienteMB.clientela.nome}">
                             </h:inputText>
-
-
                             <br />
                             <div class="btn btn-xs btn-primary">CNPJ</div>
                             <h:inputText id="inputPreco" class="form-control"
@@ -106,7 +104,7 @@
                                          value="#{ClienteMB.clientela.CNPJ}">
                             </h:inputText>
                             <br />
-                            <h4 class="form-signin-heading">Endereço</h4>
+                            <h4 class="form-signin-heading">EndereÃ§o</h4>
 
                             <table>
                                 <tr>
@@ -116,7 +114,7 @@
                                                      required="required"
                                                      value="#{ClienteMB.endereco.CEP}"
                                                      onkeypress="if (event.keyCode == 13) {return false;}">
-                                            <f:ajax event="change" listener="#{ClienteMB.buscarEndereco(ClienteMB.endereco.CEP)}"></f:ajax>
+                                            <f:ajax event="change" execute=":form01" listener="#{ClienteMB.buscarEndereco(ClienteMB.endereco.CEP)}" render=":form01 inputRua inputBairro inputCidade inputUF"></f:ajax>
                                         </h:inputText>
                                     </td>                                
                                     <td>
@@ -131,7 +129,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div class="btn btn-xs btn-primary" style="float: left;">Nº</div>        
+                                        <div class="btn btn-xs btn-primary" style="float: left;">NÂº</div>        
                                         <h:inputText id="inputNumero" style="max-width: 80px; text-align: right;float: left; display: table; margin: 0 auto; position: relative;" 
                                                      required="required"
                                                      class="form-control"
@@ -179,24 +177,18 @@
                                     <h:commandButton class="btn btn-lg btn-danger" style="width: 60%;" value="Cadastrar" action="#{ClienteMB.cadastrar()}"></h:commandButton>
                                 </td>                                    
                                 <td>
-                                    <a href="/WebJFSMangedBenas/dashCli/dashboard_clientes.xhtml" class="btn-warning btn-lg">
-                                      Retornar 
-                                    </a>
+                                    <h:commandButton class="btn btn-warning" value="Retornar" action="#{ClienteMB.limparObjeto()}"></h:commandButton>
                                 </td>
                             </tr>
-                                <tr>
-                                    <td>
-                                        <h:messages id="msgInfo"
+                            </table>            
+                        </h:form>
+                        <h:messages id="msgInfo"
                                         infoClass="btn btn-bg alert-success"
                                         warnClass="btn btn-bg alert-warning"
                                         errorClass="btn btn-bg alert-danger"
                                         fatalClass="btn btn-bg alert-danger"
                                         globalOnly="false"
                                         />
-                                    </td>
-                                </tr>
-                            </table>            
-                        </h:form>
                     </div>
                 </main>
             </div>

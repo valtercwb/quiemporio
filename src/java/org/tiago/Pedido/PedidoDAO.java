@@ -18,7 +18,7 @@ import org.tiago.Produto.Produtos;
 
 public class PedidoDAO {
     
-    public List<Pedido> listar(int id) throws ExceptionError{
+    public List<Pedido> listar() throws ExceptionError{
          ArrayList<Pedido> retorno = new ArrayList<Pedido>();
 
         try {
@@ -27,9 +27,9 @@ public class PedidoDAO {
             String sql = "SELECT p.ped_id,c.nome, en.CEP, p.data, p.ped_valor_total FROM pedidos as p\n" +
                         "inner join cliente as c on p.cliente_cli_id = c.cli_id\n" +
                         "inner join endereco as en on c.endereco_end_id = en.end_id"
-                    + "  where p.usuario_usu_id = ? order by p.data;";
+                    + "  order by p.data;";
             myDb.setQuerySql(sql);
-            myDb.setQueryParameter().setInt(1, id);
+            //myDb.setQueryParameter().setInt(1, id);
             ResultSet myResult = myDb.setQueryParameter().executeQuery();
 
             while(myResult.next()) {

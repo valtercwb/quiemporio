@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"    
@@ -25,13 +20,12 @@ and open the template in the editor.
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous"></link>
         <link href="../scripts/css/bootstrap.min.css" rel="stylesheet"></link>
         <link href="../scripts/css/fontawesome-all.min.css" rel="stylesheet"></link>
-
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"></link>
         <!-- Custom styles for this template -->
         <link href="../scripts/css/styles.css" rel="stylesheet"></link>
     </head>
 
     <body>
-
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
             <a class="navbar-brand font-weight-bold" href="#">Quiemporio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,18 +86,14 @@ and open the template in the editor.
                     <div class="container">
                         <h2 class="form-signin-heading">Estatisticas</h2>                  
                        
-                        <h:form class="form-signin">
-                            <p:outputLabel for="mask" value="Inicio" />
-                            <p:calendar id="inicio" value="#{EstatisticaMB.periodoInicial}" pattern="dd-MM-yyyy"/>
-                            <p:outputLabel for="mask" value="Fim" />
-                            <p:calendar id="fim" value="#{EstatisticaMB.periodoFinal}" pattern="dd-MM-yyyy"/>
-                            
-            <!--                <p:chart type="line" model="#{GraficoAreaMB.areaModel}"
-                            style="height:300px" />-->
-
+<!--                        <h:form class="form-signin col-6">
+                            <p:outputLabel value="Inicio" />
+                            <h:inputText value="#{EstatisticaMB.periodoInicial}" class="form-control datepicker" />
+                            <p:outputLabel value="Fim" />
+                            <h:inputText value="#{EstatisticaMB.periodoFinal}" class="form-control datepicker" />
                         </h:form>
-
-                        <iframe style="border: none" scrolling="auto" src="/WebJFSMangedBenas/newxhtml.xhtml" width="800px" height="350px">                
+  -->
+                        <iframe style="border: none" scrolling="false" src="/WebJFSMangedBenas/newxhtml.xhtml" width="900px" height="480px">                
                         </iframe>
 
                         <h:messages id="msgInfo"
@@ -119,17 +109,20 @@ and open the template in the editor.
         </div>
 
         <script>
-            $(document).ready(function (e) {
-                e.preventDefault();
-            });
-            
+            $(document).ready(function () {
+                         
             $(".datepicker").datepicker({
-            showOn: "button",
-            buttonImage: "images/calendar.gif",
-            buttonImageOnly: true
+            dateFormat: 'dd MM, yy',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "1960:2017"
             });
+        });
 
         </script>
+        
+       <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
